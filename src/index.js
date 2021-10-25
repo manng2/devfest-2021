@@ -3,7 +3,7 @@
 // This file contains the main entry point for the command line `minty` app, and the command line option parsing code.
 // See minty.js for the core functionality.
 
-const fs = require('fs/promises')
+const fs = require('fs').promises
 const path = require('path')
 const {Command} = require('commander')
 const inquirer = require('inquirer')
@@ -93,6 +93,9 @@ async function createNFT(imagePath, options) {
     ])
     console.log('NFT Metadata:')
     console.log(colorize(JSON.stringify(nft.metadata), colorizeOptions))
+    
+    const {assetURI, metadataURI} = await minty.pinTokenData(nft.tokenId)
+    console.log(`🌿 Pinned all data for token id ${chalk.green(nft.tokenId)}`)
 }
 
 async function getNFT(tokenId, options) {
@@ -127,6 +130,7 @@ async function transferNFT(tokenId, toAddress) {
 
 async function pinNFTData(tokenId) {
     const minty = await MakeMinty()
+
     const {assetURI, metadataURI} = await minty.pinTokenData(tokenId)
     console.log(`🌿 Pinned all data for token id ${chalk.green(tokenId)}`)
 }

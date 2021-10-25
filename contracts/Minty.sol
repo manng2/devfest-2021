@@ -10,7 +10,7 @@ contract Minty is ERC721 {
     Counters.Counter private _tokenIds;
 
     constructor(string memory tokenName, string memory symbol) ERC721(tokenName, symbol) {
-        _setBaseURI("ipfs://");
+        _setBaseURI("ipfs://QmVstgtKqPAUYsFgpQ1f3kPBP4To4g6tDrUMqSejKjkVHT/");
     }
 
     function mintToken(address owner, string memory metadataURI)
