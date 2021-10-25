@@ -1,0 +1,25 @@
+.StartPage {
+  height: 100vh;
+  background-color: #e2e2e2;
+
+  font-size: 2.5rem;
+
+  .input-workspace {
+    input {
+      font-size: 2rem!important;
+      width: 800px;
+    }
+  }
+
+  button {
+    font-size: 1rem;
+  }
+  button:hover {
+    background-color: #FF6B00;
+    color: white;
+  }
+
+  label {
+    text-align: left;
+  }
+}
