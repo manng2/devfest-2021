@@ -1,0 +1,81 @@
+.DragAndDrop {
+  font-family: sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  // width: 100vw;
+  // height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  main {
+    background-color: #383838;
+    color: #fff;
+    padding: 10px;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      background-color: #383838;
+      padding: 10px 20px;
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      line-height: 1;
+
+      .drag {
+        margin-right: 15px;
+        cursor: move;
+      }
+
+      svg {
+        height: 2rem;
+        color: #fff;
+      }
+    }
+  }
+
+  .box {
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: .25rem;
+    width: 160px;
+    height: 160px;
+    margin: 10px;
+    // padding: 10px;
+    float: left;
+    position: absolute;
+
+    .block-name {
+      background-color: #e2e2e2;
+      cursor: move;
+    }
+
+    .members {
+      width: 40px;
+      margin: 0 auto;
+      .online-dot {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: #61d061;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+
+  .box-text {
+    width: 250px;
+    height: 220px;
+
+    textarea {
+      width: 200px;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.Home {
+  // background-image: url("https://scontent.fdad4-1.fna.fbcdn.net/v/t1.15752-9/226007011_533690837883094_1137841523010832920_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=ae9488&_nc_ohc=k59gChS2n6sAX97MSvw&_nc_ht=scontent.fdad4-1.fna&oh=f5d88f0a86a00497bbe461e667b411c3&oe=616F1FCD");
+  background-repeat: no-repeat;
+  background-position: center; /* Center the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+
+  .kt-icon {
+    // color: rgba(0, 0, 0, .5);
+    color: #9c9fa3;
+    cursor: pointer;
+    font-size: 2rem;
+  }
+
+  .kt-block {
+    border: 1px solid rgba(0, 0, 0, .125);
+    box-shadow: 0 2px 2px 0 #e2e2e2, 0 0 0 1px #e2e2e2;
+  }
+
+  .kt-btn {
+    background-color: white;
+    color: black;
+    border: 1px solid rgba(0, 0, 0, .25);
+
+    &:hover {
+      background-color: #FF6B00!important;
+      color: white!important;
+    }
+  }
+}
