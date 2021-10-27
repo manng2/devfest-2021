@@ -5,6 +5,7 @@ import Fab from '@mui/material/Fab';
 import BackupIcon from '@mui/icons-material/Backup';
 import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/material/Box';
+import * as nftService from '../services/nft.service';
 
 import '../styles/Board.scss';
 
@@ -106,6 +107,10 @@ class Board extends React.Component {
     exportImage() {
         const canvas = document.querySelector('#board');
         const base64ImageData = canvas.toDataURL("image/png");
+
+        nftService.generateNFTProduct(base64ImageData).then(s => {
+            console.log(s);
+        })
 
         console.log(base64ImageData);
     }

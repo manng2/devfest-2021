@@ -32,9 +32,11 @@ mongoose.connect('mongodb://localhost:27017/kittyholic',
 
 const blockRouter = require('./routes/block.js');
 const workspaceRouter = require('./routes/workspace.js');
+const nftRouter = require('./routes/nft');
 
 app.use('/block', blockRouter);
 app.use('/workspace', workspaceRouter);
+app.use('/nft', nftRouter);
 
 app.use(express.static(__dirname + '/public'));
 
