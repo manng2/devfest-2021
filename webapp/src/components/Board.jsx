@@ -1,8 +1,13 @@
 import React from 'react';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
+import Fab from '@mui/material/Fab';
+import BackupIcon from '@mui/icons-material/Backup';
+import SaveIcon from '@mui/icons-material/Save';
+import Box from '@mui/material/Box';
 
 import '../styles/Board.scss';
+
 
 class Board extends React.Component {
 
@@ -15,21 +20,21 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
 
-        this.socket.on("canvas-data", function(data){
+        this.socket.on("canvas-data", function (data) {
             const root = this;
-            const interval = setInterval(function(){
-                if(root.isDrawing) return;
+            const interval = setInterval(function () {
+                if (root.isDrawing) return;
                 root.isDrawing = true;
                 clearInterval(interval);
                 const image = new Image();
                 const canvas = document.querySelector('#board');
                 const ctx = canvas && canvas.getContext('2d');
-                image.onload = function() {
-                  if (ctx) {
-                    ctx.drawImage(image, 0, 0);
+                image.onload = function () {
+                    if (ctx) {
+                        ctx.drawImage(image, 0, 0);
 
-                    root.isDrawing = false;
-                  }
+                        root.isDrawing = false;
+                    }
                 };
                 image.src = data;
             }, 200)
@@ -55,11 +60,11 @@ class Board extends React.Component {
         canvas.width = parseInt(sketch_style.getPropertyValue('width'));
         canvas.height = parseInt(sketch_style.getPropertyValue('height'));
 
-        const mouse = {x: 0, y: 0};
-        const last_mouse = {x: 0, y: 0};
+        const mouse = { x: 0, y: 0 };
+        const last_mouse = { x: 0, y: 0 };
 
         /* Mouse Capturing Work */
-        canvas.addEventListener('mousemove', function(e) {
+        canvas.addEventListener('mousemove', function (e) {
             last_mouse.x = mouse.x;
             last_mouse.y = mouse.y;
 
@@ -74,24 +79,24 @@ class Board extends React.Component {
         ctx.lineCap = 'round';
         ctx.strokeStyle = this.props.color;
 
-        canvas.addEventListener('mousedown', function(e) {
+        canvas.addEventListener('mousedown', function (e) {
             canvas.addEventListener('mousemove', onPaint, false);
         }, false);
 
-        canvas.addEventListener('mouseup', function() {
+        canvas.addEventListener('mouseup', function () {
             canvas.removeEventListener('mousemove', onPaint, false);
         }, false);
 
         const root = this;
-        const onPaint = function() {
+        const onPaint = function () {
             ctx.beginPath();
             ctx.moveTo(last_mouse.x, last_mouse.y);
             ctx.lineTo(mouse.x, mouse.y);
             ctx.closePath();
             ctx.stroke();
 
-            if(root.timeout != undefined) clearTimeout(root.timeout);
-            root.timeout = setTimeout(function(){
+            if (root.timeout != undefined) clearTimeout(root.timeout);
+            root.timeout = setTimeout(function () {
                 const base64ImageData = canvas.toDataURL("image/png");
                 root.socket.emit("canvas-data", base64ImageData);
             }, 1000)
@@ -107,11 +112,21 @@ class Board extends React.Component {
 
     render() {
         return (
-            <div className="sketch" id="sketch">
+            <div className="sketch" id="sketch" style={{ border: '2px solid #dadce0' }}>
                 <canvas className="board" id="board"></canvas>
-                <button className="btn" onClick={this.exportImage}>
+                {/* <button className="btn" onClick={this.exportImage}>
                     Export Image
-                </button>
+                </button> */}
+                <Box sx={{ '& > :not(style)': { m: 1 } }}>
+                    <Fab variant="extended" onClick={this.exportImage} style={{ zIndex: 'auto', marginTop: '-50px' }}>
+                        <BackupIcon sx={{ mr: 1 }} />
+                        Export Image
+                    </Fab>
+                    <Fab color="primary" variant="extended" style={{ zIndex: 'auto', marginTop: '-50px' }}>
+                        <SaveIcon sx={{ mr: 1 }} />
+                        Save
+                    </Fab>
+                </Box>
             </div>
         )
     }

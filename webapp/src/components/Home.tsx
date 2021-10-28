@@ -7,7 +7,7 @@ import '../styles/Home.scss';
 const HomePage: React.FunctionComponent<IPage> = props => {
   return (
     <div className="Home" id="home">
-      <div className="position-relative">
+      <div>
         <Library></Library>
         <DragAndDrop></DragAndDrop>
       </div>

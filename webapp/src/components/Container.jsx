@@ -3,8 +3,7 @@ import Board from './Board';
 
 import '../styles/Container.scss';
 
-class Container extends React.Component
-{
+class Container extends React.Component {
     constructor(props) {
         super(props);
 
@@ -29,15 +28,15 @@ class Container extends React.Component
     render() {
 
         return (
-            <div className="container">
+            <div className="container" style={{ maxWidth: 'none', background: '#f1f3f4' }}>
                 <div className="tools-section">
-                    <div className="color-picker-container">
-                        Select Brush Color : &nbsp;
-                        <input type="color" value={this.state.color} onChange={this.changeColor.bind(this)}/>
+                    <div className="color-picker-container" style={{ color: 'black' }}>
+                        Brush Color : &nbsp;
+                        <input type="color" value={this.state.color} onChange={this.changeColor.bind(this)} />
                     </div>
 
-                    <div className="brushsize-container">
-                        Select Brush Size : &nbsp;
+                    <div className="brushsize-container" style={{ color: 'black' }}>
+                        Brush Size : &nbsp;
                         <select value={this.state.size} onChange={this.changeSize.bind(this)}>
                             <option> 5 </option>
                             <option> 10 </option>
