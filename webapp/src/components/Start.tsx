@@ -5,6 +5,9 @@ import { Button, Input, InputLabel } from '@material-ui/core';
 import * as WorkspaceService from '../services/workspace.service';
 import { Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { url } from 'inspector';
+import backgroundImageStartPage from '../image/bgStartPage.png';
+import backgroundImageBlurStartPage from '../image/bgStartPageBlur.png';
 
 const StartPage: React.FunctionComponent<IPage> = props => {
   const [name, setName] = useState('');
@@ -57,20 +60,20 @@ const StartPage: React.FunctionComponent<IPage> = props => {
     setIsUploading(true)
   }
 
-  return <div className="StartPage d-flex justify-content-center align-items-center">
+  return <div className="StartPage d-flex justify-content-center align-items-center" style={{backgroundImage: `url(${workspace ? backgroundImageBlurStartPage : backgroundImageStartPage})`, backgroundSize: 'cover'}}>
     {
       !workspace ? (
-        <div className='container'>
+        <div>
           <div className='welcome'>
-            Welcome to &nbsp;<img src="https://res.cloudinary.com/kittyholic/image/upload/v1632307455/logo_xabsum.svg"/>weHuddle...
+            Workspace for designer &nbsp;<img src="https://res.cloudinary.com/kittyholic/image/upload/v1632307455/logo_xabsum.svg"/> MAD Hub...
     </div>
           <div className='input-workspace'>
-            <Input type="text" placeholder="Input your workspace's name" onChange={handleChangeName} />
+            <Input type="text" placeholder="Create or enter your workspace's name" onChange={handleChangeName} />
           </div>
-          <Button variant="outlined" onClick={createWorkspace}>Create</Button>
+          <Button variant="outlined" onClick={createWorkspace}>Enter</Button>
         </div>
       ) : (
-        <div>
+        <div style={{padding: '1em', background: 'white', borderRadius: '10px', boxShadow: '0 2px 10px rgb(0 0 0 / 20%)', WebkitBoxShadow: '0 2px 10px rgb(0 0 0 / 20%)', border: '1px solid #ccc'}}>
           <span>Create first {workspace.name}'s zone</span>
           <Form style={{ width: "500px"}}>
             <div className='info my-4'>

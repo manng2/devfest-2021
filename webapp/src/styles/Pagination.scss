@@ -5,11 +5,11 @@
   transform: translate(-50%, -50%);
 
   .space-name {
-    color: rgba(255, 255, 255, 1);
+    color: black;
   }
   .arrow-nav {
     // background-image: linear-gradient(to right, #2b5876 0%, #4e4376  51%, #2b5876  100%);
-    background-color: #004059;
+    background-color: rgb(1, 121, 122);
     font-size: 2rem;
     color: rgba(255, 255, 255, .25);
     border: 1px solid rgba(0, 0, 0, .25);
@@ -24,10 +24,10 @@
 
   .current-page {
     font-size: 2rem;
-    color: rgb(255, 255, 255, 1);
+    color: black;
 
     &:hover {
-      color: #fff;
+      color: black;
     }
   }
 }

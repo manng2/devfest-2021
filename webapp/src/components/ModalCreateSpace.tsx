@@ -5,6 +5,7 @@ import * as WorkspaceService from '../services/workspace.service';
 import { useDispatch } from 'react-redux'
 import { updateWorkspace } from '../features/workspace';
 import '../styles/Home.scss';
+import '../styles/ModalCreateSpace.scss';
 import { useParams } from 'react-router-dom';
 
 const ModalCreateSpace: React.FunctionComponent<any> = props => {

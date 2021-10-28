@@ -2,9 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 import styled from "styled-components";
-import { faPhone, faVideo, faMicrophone } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhone, faVideo, faMicrophone, faPenAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { v1 as uuid } from "uuid";
+import Fab from '@mui/material/Fab';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import CallEndIcon from '@mui/icons-material/CallEnd';
 
 const Container = styled.div`
     padding: 20px;
@@ -17,6 +22,7 @@ const Container = styled.div`
 
 const StyledVideo = styled.video`
     height: 40%;
+    border-radius: 10px;
     width: 50%;
 `;
 
@@ -30,8 +36,8 @@ const Video = (props) => {
   }, []);
 
   return (
-    <StyledVideo playsInline autoPlay ref = { ref } />
-    );
+    <StyledVideo playsInline autoPlay ref={ref} />
+  );
 }
 
 
@@ -128,34 +134,49 @@ const Room = (props) => {
   return (
     <div className='video-call'>
       <Container>
-      <StyledVideo muted ref = { userVideo } autoPlay playsInline />
-      {
-        peers.map((peer, index) => {
-          return (
-            <>
-              <Video key= { index } peer = { peer } />
-            </>
-                  );
-      })
-      }
-      <div className='btn-control d-flex'>
-        <div className='mr-3 btn-in-video-call center-div cursor-pointer'>
-          <FontAwesomeIcon icon={faVideo}></FontAwesomeIcon>
-        </div>
-        <div className='mr-3 btn-in-video-call center-div cursor-pointer' center-div>
-          <FontAwesomeIcon icon={faMicrophone}></FontAwesomeIcon>
-        </div>
-        <div className='btn-in-video-call btn-call-end center-div cursor-pointer' center-div>
-          <FontAwesomeIcon icon={faPhone}></FontAwesomeIcon>
-        </div>
-      </div>
+        <StyledVideo muted ref={userVideo} autoPlay playsInline />
+        {
+          peers.map((peer, index) => {
+            return (
+              <>
+                <Video key={index} peer={peer} />
+              </>
+            );
+          })
+        }
+        <div className='btn-control d-flex'>
+          <Fab color="primary" className='mr-3 btn-in-video-call center-div cursor-pointer' center-div onClick={joinDrawing}>
+            <BorderColorIcon />
+          </Fab>
+          <Fab color="primary" className='mr-3 btn-in-video-call center-div cursor-pointer' center-div>
+            <KeyboardVoiceIcon />
+          </Fab>
+          <Fab color="primary" className='mr-3 btn-in-video-call center-div cursor-pointer' center-div>
+            <CameraAltIcon />
+          </Fab>
+          <Fab color="primary" className='mr-3 btn-in-video-call center-div cursor-pointer' center-div style={{background: "red"}}>
+            <CallEndIcon/>
+          </Fab>
+          {/* <div className='mr-3 btn-in-video-call center-div cursor-pointer' center-div onClick={joinDrawing}>
+            <FontAwesomeIcon icon={faPenAlt}></FontAwesomeIcon>
+          </div>
+          <div className='mr-3 btn-in-video-call center-div cursor-pointer'>
+            <FontAwesomeIcon icon={faVideo}></FontAwesomeIcon>
+          </div>
+          <div className='mr-3 btn-in-video-call center-div cursor-pointer' center-div>
+            <FontAwesomeIcon icon={faMicrophone}></FontAwesomeIcon>
+          </div>
+          <div className='mr-3 btn-in-video-call btn-call-end center-div cursor-pointer' center-div>
+            <FontAwesomeIcon icon={faPhone}></FontAwesomeIcon>
+          </div> */}
 
-      <div class="btn" onClick={joinDrawing}>
-        White board
-      </div>
+          {/* <div class="btn" onClick={joinDrawing}>
+            White board
+          </div> */}
+        </div>
       </Container>
     </div>
-    );
+  );
 };
 
 export default Room;
