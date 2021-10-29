@@ -1,7 +1,7 @@
 # devfest-2021
 Getting started
 
-Make sure you install NodeJs, NPM, YARN, MongoDB, IPFS.
+Make sure you install `NodeJs, NPM, YARN, MongoDB, IPFS`.
 
 To install and run this project, you need clone this project
 ```
