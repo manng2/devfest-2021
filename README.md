@@ -1,5 +1,5 @@
 # devfest-2021
-Getting started
+### Getting started
 
 Make sure you install `NodeJs, NPM, YARN, MongoDB, IPFS`.
 
@@ -25,7 +25,7 @@ cd ..
 cd webapp
 yarn install
 ```
-Usage
+### Usage
 
 Before you start, you need to config your `mongodb` with `API` folder.
 
