@@ -19,10 +19,12 @@ const postData = async (url: string, body?: any) => {
   return data
 }
 
-export const generateNFTProduct = (imageData: string) => {
+export const generateNFTProduct = (imageData: string, name: string, description: string) => {
   const url = generateNFTProductUrl();
 
   return postData(url, {
-    imageData
+    imageData,
+    name,
+    description
   })
 }

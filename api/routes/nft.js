@@ -3,12 +3,16 @@ const router = express.Router();
 const nftController = require('../controllers/nft');
 
 router.post('/', (req, res) => {
-  const { imageData } = req.body;
+  const { imageData, name, description } = req.body;
 
   // console.log(imageData);
-  nftController.createNFT(imageData, {}).then(res => {
-    console.log(res);
+  nftController.createNFT({ imageData, name, description }, {}).then(result => {
+    console.log(result);
+
   })
+
+  res.status(200).json(true);
+
 })
 
 // router.post('/workspace/:workspaceId/create', blockController.createBlock);

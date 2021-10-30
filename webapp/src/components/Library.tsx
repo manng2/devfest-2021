@@ -91,53 +91,6 @@ const Library: React.FunctionComponent<any> = (props) => {
 
   const library = [
     {
-      type: "basic",
-      name: "Basic Blocks",
-      blocks: [
-        {
-          type: "text",
-          name: "Text",
-          image:
-            "https://d1fmnevnt6737i.cloudfront.net/library-icons/block-text.svg",
-          isRelease: true,
-        },
-        {
-          type: "image",
-          name: "Image",
-          image:
-            "https://d1fmnevnt6737i.cloudfront.net/library-icons/block-image.svg",
-          isRelease: false,
-        },
-        {
-          type: "audio",
-          name: "Audio",
-          image:
-            "https://d1fmnevnt6737i.cloudfront.net/library-icons/block-audio.svg",
-          isRelease: false,
-        },
-        {
-          type: "video",
-          name: "Video",
-          image:
-            "https://d1fmnevnt6737i.cloudfront.net/library-icons/block-video.svg",
-          isRelease: false,
-        },
-      ],
-    },
-    {
-      type: "action",
-      name: "Action Blocks",
-      blocks: [
-        {
-          type: "alarm",
-          name: "Alarm",
-          image:
-            "https://d1fmnevnt6737i.cloudfront.net/library-icons/block-otn.svg",
-          isRelease: false,
-        },
-      ],
-    },
-    {
       type: "none",
       name: "Other",
       blocks: [
@@ -157,6 +110,53 @@ const Library: React.FunctionComponent<any> = (props) => {
         },
       ],
     },
+    {
+      type: "basic",
+      name: "Basic Blocks",
+      blocks: [
+        {
+          type: "text",
+          name: "Text",
+          image:
+            "https://d1fmnevnt6737i.cloudfront.net/library-icons/block-text.svg",
+          isRelease: true,
+        },
+        {
+          type: "image",
+          name: "Image",
+          image:
+            "https://d1fmnevnt6737i.cloudfront.net/library-icons/block-image.svg",
+          isRelease: true,
+        },
+        {
+          type: "audio",
+          name: "Audio",
+          image:
+            "https://d1fmnevnt6737i.cloudfront.net/library-icons/block-audio.svg",
+          isRelease: true,
+        },
+        {
+          type: "video",
+          name: "Video",
+          image:
+            "https://d1fmnevnt6737i.cloudfront.net/library-icons/block-video.svg",
+          isRelease: true,
+        },
+      ],
+    },
+    {
+      type: "action",
+      name: "Action Blocks",
+      blocks: [
+        {
+          type: "alarm",
+          name: "Alarm",
+          image:
+            "https://d1fmnevnt6737i.cloudfront.net/library-icons/block-otn.svg",
+          isRelease: true,
+        },
+      ],
+    }
   ];
 
   const handleStateLibrary = () => {

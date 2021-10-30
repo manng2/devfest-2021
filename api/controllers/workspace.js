@@ -10,15 +10,17 @@ const createWorkspace = async (req, res) => {
   const { file } = req;
 
   const base64Img = `data:${file.mimetype};base64,` + Buffer.from(file.buffer).toString('base64');
-
+  
   cloudinary.config({
-    cloud_name: 'kittyholic',
-    api_key: '483233327447876',
-    api_secret: 'qYPWVErdKqZM3UsiBkc5G_SdNP8',
+    cloud_name: 'devfest2021madhub',
+    api_key: '387355844566992',
+    api_secret: 'wrpZ-ne6rhSvDJc0MaH36B21aBw',
     secure: true
   });
 
   cloudinary.uploader.upload(base64Img, async function (error, result) {
+    console.log('res', result);
+    console.log('err', error);
     const { url } = result;
     const newspace = {
       name,

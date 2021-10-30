@@ -1,13 +1,13 @@
 import React from 'react';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
-import Fab from '@mui/material/Fab';
 import BackupIcon from '@mui/icons-material/Backup';
 import SaveIcon from '@mui/icons-material/Save';
-import Box from '@mui/material/Box';
 import * as nftService from '../services/nft.service';
-
+import { Input, InputLabel, FormControl, Modal, Box, Fab, Snackbar, IconButton } from '@mui/material';
+import { Toast, Button } from 'react-bootstrap';
 import '../styles/Board.scss';
+import { FormGroup } from '@material-ui/core';
 
 
 class Board extends React.Component {
@@ -40,6 +40,19 @@ class Board extends React.Component {
                 image.src = data;
             }, 200)
         })
+        this.state = {
+            openModal: false,
+            name: '',
+            description: '',
+            openToast: false
+        }
+        this.handleClose = this.handleClose.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleCloseToast = this.handleCloseToast.bind(this);
+        this.handleOpenToast = this.handleOpenToast.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -104,34 +117,145 @@ class Board extends React.Component {
         };
     }
 
-    exportImage() {
+    // exportImage() {
+    //     const canvas = document.querySelector('#board');
+    //     const base64ImageData = canvas.toDataURL("image/png");
+
+    //     nftService.generateNFTProduct(base64ImageData).then(s => {
+    //         console.log(s);
+    //     })
+
+    //     console.log(base64ImageData);
+    // }
+
+
+    handleOpen() {
+        this.setState({
+            openModal: true
+        })
+    }
+
+    handleClose() {
+        this.setState({
+            openModal: false
+        })
+    }
+
+    handleOpenToast() {
+        this.setState({
+            openToast: true
+        })
+    }
+
+    handleCloseToast() {
+        this.setState({
+            openToast: false
+        })
+    }
+
+    onChangeName(e) {
+        this.setState({
+            ...this.state,
+            name: e.target.value
+        });
+    }
+
+    onChangeDescription(e) {
+        this.setState({
+            ...this.state,
+            description: e.target.value
+        });
+    }
+
+    submit() {
         const canvas = document.querySelector('#board');
         const base64ImageData = canvas.toDataURL("image/png");
+        const name = this.state.name;
+        const description = this.state.description;
 
-        nftService.generateNFTProduct(base64ImageData).then(s => {
-            console.log(s);
+        nftService.generateNFTProduct(base64ImageData, name, description).then(s => {
+            if (s) {
+                this.handleClose();
+                this.handleOpenToast();
+            }
         })
-
-        console.log(base64ImageData);
     }
+
+    style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+
+    action = (
+        <React.Fragment>
+          {/* <Button color="secondary" size="small" onClick={this.handleCloseToast}>
+            UNDO
+          </Button> */}
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={this.handleCloseToast}
+          >
+          </IconButton>
+        </React.Fragment>
+      );
 
     render() {
         return (
             <div className="sketch" id="sketch" style={{ border: '2px solid #dadce0' }}>
-                <canvas className="board" id="board"></canvas>
-                {/* <button className="btn" onClick={this.exportImage}>
-                    Export Image
-                </button> */}
-                <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                    <Fab variant="extended" onClick={this.exportImage} style={{ zIndex: 'auto', marginTop: '-50px' }}>
-                        <BackupIcon sx={{ mr: 1 }} />
-                        Export Image
-                    </Fab>
-                    <Fab color="primary" variant="extended" style={{ zIndex: 'auto', marginTop: '-50px' }}>
-                        <SaveIcon sx={{ mr: 1 }} />
-                        Save
-                    </Fab>
-                </Box>
+                <div>
+                    <canvas className="board" id="board"></canvas>
+                    <Box sx={{ '& > :not(style)': { m: 1 } }}>
+                        <Fab variant="extended" onClick={this.handleOpen} style={{ zIndex: 'auto', marginTop: '-50px' }}>
+                            <BackupIcon sx={{ mr: 1 }} />
+                            Generate NFT Product
+                        </Fab>
+                        <Fab color="primary" variant="extended" style={{ zIndex: 'auto', marginTop: '-50px' }}>
+                            <SaveIcon sx={{ mr: 1 }} />
+                            Save
+                        </Fab>
+                    </Box>
+                </div>
+                <div>
+                    <Modal
+                    open={this.state.openModal}
+                    onClose={this.handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    >
+                    <Box sx={this.style}>
+                        <FormGroup onSubmit={this.submit}>
+                            <FormControl>
+                                <InputLabel htmlFor="name">Name</InputLabel>
+                                <Input id="name" aria-describedby="my-helper-text" onChange={this.onChangeName}/>
+                            </FormControl>
+                            <br/>
+                            <FormControl>
+                                <InputLabel htmlFor="description">Description</InputLabel>
+                                <Input id="description" aria-describedby="my-helper-text" onChange={this.onChangeDescription}/>
+                            </FormControl>
+                            <Button className="mt-3" onClick={this.submit}>Submit</Button>
+                        </FormGroup>
+                    </Box>
+                    </Modal>
+                </div>
+                <div>
+                <Snackbar
+                    open={this.state.openToast}
+                    autoHideDuration={3000}
+                    onClose={this.handleCloseToast}
+                    message="Your item is publishing on Opensea. You will receive email when the action have done."
+                    action={this.action}
+                />
+                </div>
             </div>
         )
     }

@@ -67,27 +67,26 @@ async function generateNFTProduct() {
 
 // ---- command action functions
 
-async function createNFT(imagePath, options) {
+async function createNFT(product, options) {
     const minty = await MakeMinty()
-
+    const { imageData, name, description } = product;
     // prompt for missing details if not provided as cli args
-    const answers = await promptForMissing(options, {
-        name: {
-            message: 'Enter a name for your new NFT: '
-        },
+    // const answers = await promptForMissing(options, {
+    //     name: {
+    //         message: 'Enter a name for your new NFT: '
+    //     },
 
-        description: {
-            message: 'Enter a description for your new NFT: '
-        }
-    })
-    // const answers = {
-    //     name: 'hello',
-    //     description: 'hello test ne',
-    //     path: '/'
-    // }
+    //     description: {
+    //         message: 'Enter a description for your new NFT: '
+    //     }
+    // })
+    const answers = {
+        name,
+        description,
+        path: `${name}.png`
+    }
 
-    const nft = await minty.createNFTFromBase64(imagePath, answers)
-    // const nft = await minty.createNFTFromAssetData(imagePath, answers);
+    const nft = await minty.createNFTFromBase64(imageData, answers)
     console.log('🌿 Minted a new NFT: ')
 
     alignOutput([

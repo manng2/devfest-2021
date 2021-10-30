@@ -121,10 +121,12 @@ class Minty {
         if (!ownerAddress) {
             ownerAddress = await this.defaultOwnerAddress()
         }
+        console.log('123, ', ownerAddress);
 
         // mint a new token referencing the metadata URI
         const tokenId = await this.mintToken(ownerAddress, metadataURI)
 
+        console.log('123, ', tokenId);
         // format and return the results
         return {
             tokenId,
@@ -168,9 +170,8 @@ class Minty {
     async createNFTFromBase64(base64Data, options) {
         const buf = Buffer.from(base64Data.split(',')[1], 'base64')
         // const buf = convertImage.decode(base64Data)
-        console.log('buf', buf)
 
-        return this.createNFTFromAssetData(buf, { ...options, path: 'h311o.png' });
+        return this.createNFTFromAssetData(buf, { ...options });
     }
     /**
      * Helper to construct metadata JSON for 

@@ -65,10 +65,10 @@ const StartPage: React.FunctionComponent<IPage> = props => {
       !workspace ? (
         <div>
           <div className='welcome'>
-            Workspace for designer &nbsp;<img src="https://res.cloudinary.com/kittyholic/image/upload/v1632307455/logo_xabsum.svg"/> MAD Hub...
+            <img src="https://res.cloudinary.com/kittyholic/image/upload/v1632307455/logo_xabsum.svg"/> MAD Hub...
     </div>
           <div className='input-workspace'>
-            <Input type="text" placeholder="Create or enter your workspace's name" onChange={handleChangeName} />
+            <Input type="text" placeholder="Enter your workspace's name" onChange={handleChangeName} />
           </div>
           <Button variant="outlined" onClick={createWorkspace}>Enter</Button>
         </div>
